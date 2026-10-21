@@ -1,0 +1,121 @@
+---
+import { ui, localizedRoutes } from '@/i18n/ui.ts';
+import LogoRTL from '../assets/olomweb-rtl.svg'
+import LogoLTR from '../assets/olomweb-ltr.svg'
+
+const { lang, active } = Astro.props as {
+  lang: 'ar' | 'en';
+  active: 'home' | 'courses' | 'projects' | 'about';
+};
+const locale = ui[lang];
+const routes = localizedRoutes(lang);
+const altLang = lang === 'ar' ? 'en' : 'ar';
+const altLabel = altLang === 'en' ? 'English' : 'العربية';
+const altUrl = altLang === 'en' ? '/en/' : '/';
+
+const navItems = [
+  { key: 'home', label: locale.nav.home, href: routes.home },
+  { key: 'courses', label: locale.nav.courses, href: routes.courses },
+  { key: 'projects', label: locale.nav.projects, href: routes.projects },
+  { key: 'about', label: locale.nav.about, href: routes.about },
+] as const;
+
+const activeClass = 'bg-primary-container text-on-primary font-bold rounded-lg';
+const idleClass = 'font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors';
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
+>
+  <div class="h-20 max-w-[1360px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop flex items-center justify-between gap-space-md">
+    <div class="flex items-center gap-space-md">
+      <a href={routes.home} aria-label={locale.brandLine} class="flex items-center gap-space-sm" data-path="home">
+        { lang === 'en'
+          ? <img width="155" src={LogoLTR.src} alt="OLOMWEB">
+          : <img width="155" src={LogoRTL.src} alt="OLOMWEB">
+        }
+      </a>
+      <nav class="hidden xl:flex items-center gap-space-sm" aria-label={locale.nav.home}>
+        {
+          navItems.map((item) => (
+            <a
+              aria-current={active === item.key ? 'page' : undefined}
+              class={`px-space-sm py-space-xs rounded-lg ${active === item.key ? activeClass : idleClass}`}
+              data-path={item.key}
+              href={item.href}
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+    <div class="flex items-center gap-space-sm">
+      <div class="hidden md:flex items-center gap-space-xs text-on-surface-variant">
+        <a aria-label={locale.social.youtube} class="p-space-xs rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors" href="https://youtube.com/@olomweb" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-youtube fa-xl"></i>
+        </a>
+        <a aria-label={locale.social.github} class="p-space-xs rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors" href="https://github.com/aabouissa" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-github fa-xl"></i>
+        </a>
+        <a aria-label={locale.social.linkedin} class="p-space-xs rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors" href="https://linkedin.com/in/aabouissa">
+          <i class="fa-brands fa-linkedin fa-xl"></i>
+        </a>
+      </div>
+      <a
+        href={altUrl}
+        hreflang={altLang}
+        aria-label={locale.switchLang}
+        title={locale.switchLang}
+        class="hidden sm:inline-flex items-center px-space-sm py-space-xs rounded-lg border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary transition-colors font-label-md text-label-md"
+      >
+        {altLabel}
+      </a>
+      <button
+        id="mobile-menu-btn"
+        type="button"
+        aria-label={locale.openMenu}
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        class="xl:hidden inline-flex items-center justify-center w-9 h-9 rounded-lg hover:bg-surface-container transition-colors"
+      >
+        <span class="material-symbols-outlined text-[22px]">menu</span>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="xl:hidden hidden bg-surface border-t border-surface-container px-margin-mobile pt-space-sm pb-space-md shadow-lg">
+    <nav class="flex flex-col gap-space-xs" aria-label={locale.nav.home}>
+      {
+        navItems.map((item) => (
+          <a
+            aria-current={active === item.key ? 'page' : undefined}
+            class={`px-space-sm py-space-sm rounded-lg font-label-md text-label-md ${
+              active === item.key ? activeClass : 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors'
+            }`}
+            data-nav={item.key}
+            href={item.href}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const currentPath = window.location.pathname;
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.querySelector('.material-symbols-outlined')!.textContent = open ? 'menu' : 'close';
+    });
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => menu.classList.add('hidden'));
+    });
+  }
+</script>

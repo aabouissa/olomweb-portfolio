@@ -1,0 +1,20 @@
+{
+  "name": "olomweb",
+  "version": "1.0.0",
+  "description": "OLOMWEB - شبكة علوم | Bilingual (AR/EN) Astro platform",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.2",
+    "autoprefixer": "^10.6.0",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^4.3.3"
+  }
+}

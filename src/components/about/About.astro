@@ -1,0 +1,376 @@
+---
+import { aboutDict } from '@/i18n/about.ts';
+
+const { lang } = Astro.props as { lang: 'ar' | 'en' };
+const t = aboutDict[lang];
+const isAr = lang === 'ar';
+---
+
+<section class="relative w-full overflow-hidden bg-surface-container-lowest py-space-xl">
+  <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-secondary-container/15 blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-0 right-[-10%] w-[480px] h-[480px] rounded-full bg-primary-fixed/20 blur-3xl pointer-events-none"></div>
+  <div class="max-w-[1360px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-gutter-xl lg:items-center">
+      <div class="flex flex-col gap-space-md">
+        <div class="inline-flex items-center gap-space-xs self-start px-space-sm py-1 rounded-full bg-surface-container text-primary font-code-sm text-code-sm">
+          <span class={`w-2 h-2 rounded-full bg-secondary ${isAr ? '' : 'animate-pulse'}`}></span>
+          <span>{t.heroBadge}</span>
+        </div>
+        <h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface tracking-tight max-w-2xl">{t.heroTitle}</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">{t.heroDesc}</p>
+        <div class="flex flex-wrap items-center gap-space-sm pt-space-xs">
+          <a class="inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded-xl bg-primary text-on-primary font-label-md text-label-md font-semibold shadow-md hover:brightness-110 active:scale-95 transition-all" href="#narrative">
+            <span class="material-symbols-outlined text-[20px]">auto_stories</span>
+            <span>{t.discoverStory}</span>
+          </a>
+          <a class="inline-flex items-center gap-space-xs px-space-md py-space-sm rounded-xl bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-container-highest transition-colors" href="#gear">
+            <span class="material-symbols-outlined text-[20px]">developer_mode</span>
+            <span>{t.devStack}</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] max-w-md mx-auto lg:ml-auto">
+          <img alt={t.portraitAlt} class="w-full h-full object-cover" loading="eager" src="/images/about-portrait.png" />
+          <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface via-transparent to-transparent opacity-40"></div>
+          <div class="absolute bottom-0 right-0 left-0 p-space-md bg-gradient-to-t from-inverse-surface/90 to-transparent flex flex-col gap-0.5">
+            <span class="text-inverse-on-surface/60 font-code-sm text-code-sm">{t.portraitRole}</span>
+            <span class="text-on-primary font-label-md text-label-md font-bold">{t.portraitName}</span>
+          </div>
+        </div>
+        <div class={`absolute top-6 ${isAr ? 'right-[-16px]' : 'left-[-16px]'} bg-surface-container-high backdrop-blur-md border border-outline-variant/30 rounded-xl px-space-md py-space-sm shadow-lg flex flex-col gap-0.5`}>
+          <span class="font-label-md text-label-md text-primary font-bold">{t.floatingTitle}</span>
+          <span class="font-code-sm text-code-sm text-on-surface-variant" dir="ltr">{t.floatingCode}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-lg mt-space-xl">
+      {
+        t.metrics.map((m) => (
+          <div class="p-space-lg rounded-xl bg-surface-container-low flex items-center gap-space-md shadow-sm">
+            <span class={`h-10 w-1 rounded-full ${m.color} bg-current`}></span>
+            <div class="flex flex-col">
+              <span class={`font-headline-md text-headline-md ${m.color} font-bold`} dir="ltr">{m.value}</span>
+              <span class="font-label-sm text-label-sm text-on-surface-variant">{m.label}</span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="w-full bg-surface" id="narrative">
+  <div class="max-w-[1360px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop py-space-xl flex flex-col gap-space-lg">
+    <div class="flex flex-col items-center text-center gap-space-xs max-w-3xl mx-auto">
+      <span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">{t.narrative.eyebrow}</span>
+      <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">{t.narrative.title}</h2>
+      <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">{t.narrative.intro}</p>
+      <blockquote class="relative mt-space-md p-space-lg rounded-xl bg-surface-container-lowest shadow-sm border-l-4 border-secondary text-on-surface font-body-lg text-body-lg md:text-label-lg leading-relaxed max-w-2xl text-start">
+        <span class="absolute -top-3 -start-3 w-8 h-8 rounded-lg bg-secondary text-on-secondary flex items-center justify-center">
+          <span class="material-symbols-outlined text-[18px]">format_quote</span>
+        </span>
+        {t.narrative.quote}
+      </blockquote>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter-lg">
+      {
+        t.narrative.cards.map((card) => (
+          <article class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md hover:shadow-lg hover:-translate-y-0.5 transition-all">
+            <div class="flex items-center justify-between">
+              <div class={`w-12 h-12 rounded-xl ${card.iconBg} flex items-center justify-center ${card.iconColor}`}>
+                <span class="material-symbols-outlined text-[26px]">{card.icon}</span>
+              </div>
+              <span class={`font-code-sm text-code-sm ${card.codeColor} font-semibold`} dir="ltr">{card.code}</span>
+            </div>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface leading-snug">{card.title}</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">{card.desc}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-[0.7fr_1.3fr] gap-gutter-lg items-stretch">
+      <div class="relative rounded-2xl overflow-hidden shadow-lg min-h-[300px] md:min-h-full">
+        <img alt="Hands keyboard" class="absolute inset-0 w-full h-full object-cover" loading="lazy" src="/images/about-hands.png" />
+        <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 to-transparent"></div>
+        <div class="absolute bottom-0 right-0 left-0 p-space-md">
+          <span class="text-on-primary font-code-sm text-code-sm flex items-center gap-1" dir="ltr">
+            <span class="material-symbols-outlined text-[16px]">keyboard</span>
+            vim-typing-master.ts
+          </span>
+        </div>
+      </div>
+      <div class="p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col justify-between gap-space-md">
+        <div class="flex flex-col gap-space-xs">
+          <span class="font-code-sm text-code-sm text-secondary">{t.narrative.cards[0].code}</span>
+          <h3 class="font-headline-md text-headline-md text-on-surface leading-snug">{t.narrative.cards[0].title}</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">{t.narrative.cards[0].desc}</p>
+        </div>
+        <div class="h-2 rounded-full bg-surface-container-high overflow-hidden">
+          <div class="h-full w-3/4 rounded-full bg-secondary" ></div>
+        </div>
+        <div class="flex flex-wrap gap-space-xs font-code-sm text-code-sm text-on-surface-variant">
+          <span class="px-space-xs py-1 rounded bg-surface-container-high">Memory Management</span>
+          <span class="px-space-xs py-1 rounded bg-surface-container-high">Event Loop</span>
+          <span class="px-space-xs py-1 rounded bg-surface-container-high" dir="ltr">Systems Distribution</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="w-full bg-surface-container-low py-space-xl">
+  <div class="max-w-[1360px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop flex flex-col gap-space-xl">
+    <div class="flex flex-col items-center text-center gap-space-xs max-w-3xl mx-auto">
+      <span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">{t.pillars.eyebrow}</span>
+      <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">{t.pillars.title}</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant">{t.pillars.desc}</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-lg">
+      {
+        t.pillars.items.map((item) => (
+          <article class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+            <div class={`w-12 h-12 rounded-xl ${item.iconBg} text-on-primary flex items-center justify-center shadow-md`}>
+              <span class="material-symbols-outlined text-[26px]">{item.icon}</span>
+            </div>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface leading-snug">{item.title}</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">{item.desc}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter-lg">
+      {
+        t.pillars.domains.map((domain) => (
+          <article class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md hover:shadow-lg transition-all">
+            <div class="flex items-center justify-between">
+              <div class={`w-11 h-11 rounded-xl bg-surface-container-high flex items-center justify-center ${domain.iconColor}`}>
+                <span class="material-symbols-outlined text-[24px]">{domain.icon}</span>
+              </div>
+              <span class="px-space-xs py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-code-sm text-code-sm">{domain.pill}</span>
+            </div>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface leading-snug">{domain.title}</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">{domain.desc}</p>
+            <div class="flex items-center gap-space-xs pt-space-xs mb-1 border-t border-outline-variant/40">
+              <span class={`material-symbols-outlined ${domain.footerColor} text-[18px]`}>{domain.footerIcon}</span>
+              <span class={`font-code-sm text-code-sm ${domain.footerColor} font-semibold`}>{domain.footer}</span>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="w-full bg-surface py-space-xl">
+  <div class="max-w-[1360px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop">
+    <div class="flex flex-col items-center text-center gap-space-xs max-w-3xl mx-auto mb-space-xl">
+      <span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">{t.timeline.label}</span>
+      <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">{t.timeline.title}</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant">{t.timeline.desc}</p>
+    </div>
+    <div class="relative flex flex-col gap-space-lg">
+      <div class={`absolute top-0 bottom-0 w-px bg-outline-variant/50 ${isAr ? 'right-[18px]' : 'left-[18px]'} md:left-1/2 md:-translate-x-1/2 basis-full`}></div>
+      {
+        t.timeline.items.map((item, i) => (
+          <div class={`relative flex flex-col md:flex-row gap-space-sm md:gap-0 ${isAr ? 'md:pl-0' : ''} ${i % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+            <div class={`hidden md:block md:w-1/2${i % 2 === 1 ? ' md:order-1' : ''}`}></div>
+            <div class={`absolute top-5 ${isAr ? 'right-[18px]' : 'left-[18px]'} ${isAr ? '-translate-x-1/2' : '-translate-x-1/2'} md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full border-2 border-surface bg-primary shadow-md`}></div>
+            <div class={`ms-10 md:ms-0 md:w-1/2 ${i % 2 === 1 ? 'md:order-2' : 'md:order-1'} ${i % 2 === 1 ? 'md:ps-space-xl' : 'md:pe-space-xl'}`}>
+              <article class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-sm">
+                <div class="flex items-center gap-space-xs">
+                  <span class={`font-code-sm text-code-sm ${item.periodColor} font-bold`} dir={isAr ? 'rtl' : 'ltr'}>{item.period}</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-space-xs">
+                  <span class={`font-label-sm text-label-sm text-on-surface-variant px-space-xs py-0.5 rounded bg-surface-container-high`}>{item.stage}</span>
+                  <span class="font-code-sm text-code-sm text-on-surface-variant">{item.org}</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface leading-snug">{item.itemTitle}</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">{item.desc}</p>
+                <div class="flex flex-wrap gap-space-xs mt-auto pt-space-xs">
+                  {
+                    item.tags.map((tag) => (
+                      <span class="px-space-xs py-1 rounded-full bg-secondary-fixed/40 text-primary font-code-sm text-code-sm">{tag}</span>
+                    ))
+                  }
+                </div>
+              </article>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="w-full bg-surface-container-low py-space-xl" id="gear">
+  <div class="max-w-[1360px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop flex flex-col gap-space-xl">
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.6fr] gap-gutter-xl items-center">
+      <div class="flex flex-col gap-space-xs">
+        <span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">{t.gear.eyebrow}</span>
+        <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">{t.gear.title}</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant">{t.gear.desc}</p>
+        <div class="mt-space-md flex flex-col gap-space-xs p-space-md rounded-xl bg-surface-container-lowest shadow-sm">
+          <span class="font-label-md text-label-md text-primary font-semibold flex items-center gap-space-xs">
+            <span class="material-symbols-outlined text-[20px]">eco</span>
+            {t.gear.prefTitle}
+          </span>
+          <span class="font-body-sm text-body-sm text-on-surface-variant">{t.gear.prefDesc}</span>
+        </div>
+      </div>
+      <div class="relative rounded-2xl overflow-hidden shadow-lg aspect-video">
+        <img alt={t.gear.studio.alt} class="w-full h-full object-cover" loading="lazy" src="/images/gallery-studio.png" />
+        <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/70 to-transparent"></div>
+        <div class="absolute bottom-0 right-0 left-0 p-space-md flex flex-col gap-0.5">
+          <span class="text-on-primary font-label-md text-label-md font-bold">{t.gear.studio.label}</span>
+          <span class="text-inverse-on-surface/70 font-code-sm text-code-sm">{t.gear.studio.title}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter-lg">
+      {
+        t.gear.items.map((item) => (
+          <article class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-sm hover:shadow-lg hover:-translate-y-0.5 transition-all">
+            <div class="flex items-center justify-between">
+              <div class={`w-11 h-11 rounded-xl bg-surface-container-high flex items-center justify-center ${item.iconColor}`}>
+                <span class="material-symbols-outlined text-[24px]">{item.icon}</span>
+              </div>
+              <span class={`px-space-xs py-1 rounded-full font-code-sm text-code-sm ${item.tagBg}`}>{item.tag}</span>
+            </div>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface">{item.title}</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">{item.desc}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="w-full bg-surface py-space-xl">
+  <div class="max-w-[1360px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop">
+    <div class="flex flex-col items-center text-center gap-space-xs max-w-3xl mx-auto mb-space-xl">
+      <span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">{t.speaking.eyebrow}</span>
+      <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">{t.speaking.title}</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant">{t.speaking.desc}</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-lg">
+      {
+        t.speaking.items.map((item) => (
+          <article class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+            <div class={`w-12 h-12 rounded-xl ${item.iconBg} flex items-center justify-center ${item.iconColor}`}>
+              <span class="material-symbols-outlined text-[26px]">{item.icon}</span>
+            </div>
+            <span class={`font-label-sm text-label-sm font-bold ${item.labelColor}`}>{item.label}</span>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface leading-snug">{item.title}</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed flex-1">{item.desc}</p>
+            <div class="flex items-center justify-between pt-space-md mt-auto border-t border-outline-variant/40">
+              <span class="font-code-sm text-code-sm text-on-surface-variant flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px]">place</span>
+                {item.place}
+              </span>
+              <span class="px-space-xs py-0.5 rounded-lg bg-surface-container-high text-on-surface font-code-sm text-code-sm">{item.kind}</span>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="w-full bg-inverse-surface py-space-xl">
+  <div class="max-w-[1360px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop">
+    <div class="rounded-2xl overflow-hidden flex flex-col lg:flex-row gap-gutter-xl bg-surface-container-lowest shadow-xl">
+      <div class="flex-1 p-space-lg md:p-space-xl flex flex-col gap-space-md">
+        <div class="flex items-center gap-space-xs self-start px-space-sm py-1 rounded-full bg-surface-container text-primary font-code-sm text-code-sm" dir="ltr">
+          <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+          <span>{t.terminal.badge}.ts</span>
+        </div>
+        <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface leading-snug">{t.terminal.title}</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant">{t.terminal.desc}</p>
+      </div>
+      <div class="lg:w-[46%] bg-inverse-surface p-space-lg md:p-space-xl relative">
+        <div class="flex items-center justify-between mb-space-md">
+          <div class="flex items-center gap-space-xs">
+            <span class="w-3 h-3 rounded-full bg-error"></span>
+            <span class="w-3 h-3 rounded-full bg-secondary"></span>
+            <span class="w-3 h-3 rounded-full bg-tertiary"></span>
+          </div>
+          <span class="font-code-sm text-code-sm text-inverse-on-surface/70 flex items-center gap-1" dir="ltr">
+            <span class="material-symbols-outlined text-[16px]">code_blocks</span>
+            {t.terminal.fileName}
+          </span>
+          <button class="inline-flex items-center gap-1 font-code-sm text-code-sm text-on-primary hover:bg-on-primary/10 rounded-md px-space-xs py-1 transition-colors" data-copied-label={t.terminal.copied} id="copy-code" type="button">
+            <span class="material-symbols-outlined text-[16px]" id="copy-icon">copy_all</span>
+            <span id="copy-label">{t.terminal.copy}</span>
+          </button>
+        </div>
+        <pre class="font-code-sm text-code-sm text-inverse-on-surface leading-relaxed overflow-x-auto" dir="ltr" id="terminal-code"><code>{t.terminal.code}</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="w-full bg-surface-container-low py-space-xl">
+  <div class="max-w-[1360px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop">
+    <div class="rounded-2xl bg-primary-fixed p-space-lg md:p-space-xl flex flex-col lg:flex-row items-center justify-between gap-space-lg shadow-lg relative overflow-hidden">
+      <div class="absolute -top-20 -left-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="flex flex-col gap-space-sm relative z-10">
+        <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-primary-fixed">{t.cta.title}</h2>
+        <p class="font-body-md text-body-md text-on-primary-fixed/80 max-w-2xl leading-relaxed">{t.cta.desc}</p>
+        <div class="flex items-center gap-space-xs text-on-primary-fixed/70 font-label-sm text-label-sm">
+          <span class="w-2 h-2 rounded-full bg-secondary"></span>
+          <span>{t.cta.available}</span>
+          <span class="text-outline">•</span>
+          <span>{t.cta.replyTime}</span>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row items-stretch gap-space-sm shrink-0 relative z-10">
+        <a class="inline-flex items-center justify-center gap-space-xs px-space-lg py-space-md rounded-xl bg-on-primary-fixed text-primary-fixed font-label-md text-label-md font-semibold hover:brightness-110 active:scale-95 transition-all shadow-md" href="#">
+          <span class="material-symbols-outlined text-[20px]">forum</span>
+          <span>{t.cta.contact}</span>
+        </a>
+        <a class="inline-flex items-center justify-center gap-space-xs px-space-md py-space-md rounded-xl bg-primary-container text-on-primary-fixed font-label-md text-label-md hover:brightness-105 transition-all" href="https://youtube.com" rel="noopener noreferrer" target="_blank">
+          <span class="material-symbols-outlined text-[20px]">smart_display</span>
+          <span>{t.cta.browseChannel}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const copyBtn = document.getElementById('copy-code') as HTMLButtonElement | null;
+  const copyIcon = document.getElementById('copy-icon') as HTMLElement | null;
+  const copyLabel = document.getElementById('copy-label') as HTMLElement | null;
+  const codeEl = document.getElementById('terminal-code') as HTMLElement | null;
+
+  if (copyBtn && codeEl && copyIcon && copyLabel) {
+    const original = copyLabel.textContent;
+    const copied = copyBtn.getAttribute('data-copied-label') || '';
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(codeEl.textContent || '');
+        copyIcon.textContent = 'check_circle';
+        copyLabel.textContent = copied;
+        setTimeout(() => {
+          copyIcon.textContent = 'copy_all';
+          copyLabel.textContent = original;
+        }, 2000);
+      } catch {
+        copyIcon.textContent = 'error';
+        copyLabel.textContent = '';
+        setTimeout(() => {
+          copyIcon.textContent = 'copy_all';
+          copyLabel.textContent = original;
+        }, 2000);
+      }
+    });
+  }
+</script>

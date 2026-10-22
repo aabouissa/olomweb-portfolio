@@ -1,5 +1,6 @@
 ---
 import { ui, localizedRoutes } from '@/i18n/ui.ts';
+import SocialIcon from './SocialIcon.astro';
 
 const { lang } = Astro.props as { lang: 'ar' | 'en' };
 const UI = ui[lang];
@@ -11,14 +12,13 @@ const quickLinks = [
   { label: UI.footer.quick.courses, href: routes.courses },
   { label: UI.footer.quick.projects, href: routes.projects },
   { label: UI.footer.quick.about, href: routes.about },
-  { label: UI.footer.quick.contact, href: routes.contact },
 ];
 const socialLinks = [
-  { aria: UI.social.youtube, icon: 'smart_display', href: 'https://youtube.com' },
-  { aria: UI.social.github, icon: 'code', href: 'https://github.com' },
-  { aria: UI.social.x, icon: 'terminal', href: '#' },
-  { aria: UI.social.linkedin, icon: 'hub', href: 'https://linkedin.com' },
-];
+  { aria: UI.social.youtube, name: 'youtube', href: 'https://youtube.com/@olomweb' },
+  { aria: UI.social.github, name: 'github', href: 'https://github.com/aabouissa' },
+  { aria: UI.social.telegram, name: 'telegram', href: 'https://t.me/aabouissa' },
+  { aria: UI.social.linkedin, name: 'linkedin', href: 'https://linkedin.com/in/aabouissa' },
+] as const;
 ---
 
 <footer class="w-full bg-surface-container-low">
@@ -31,7 +31,7 @@ const socialLinks = [
           : <img width="200" src={LogoRTL.src} alt="OLOMWEB">
         }
         </div>
-        <p class="font-body-sm text-body-sm text-on-surface-variant max-w-lg">{UI.footer.tagline}</p>
+        <p class="font-body-sm text-body-sm text-on-surface-variant max-w-lg mt-2">{UI.footer.tagline}</p>
       </div>
       <div class="flex flex-col gap-space-xs">
         <span class="font-headline-sm text-headline-sm text-on-surface">{UI.footer.quickTitle}</span>
@@ -51,15 +51,15 @@ const socialLinks = [
         <p class="font-body-sm text-body-sm text-on-surface-variant">{UI.footer.communityText}</p>
         <div class="flex items-center gap-space-sm mt-space-xs">
           {
-            socialLinks.map((icon) => (
+            socialLinks.map((social) => (
               <a
-                aria-label={icon.aria}
+                aria-label={social.aria}
                 class="w-9 h-9 rounded-lg bg-surface flex items-center justify-center text-secondary hover:bg-surface-container-high transition-colors"
-                href={icon.href}
+                href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span class="material-symbols-outlined text-[20px]">{icon.icon}</span>
+                <SocialIcon name={social.name} />
               </a>
             ))
           }
@@ -67,7 +67,7 @@ const socialLinks = [
       </div>
     </div>
     <div class="mt-space-xl pt-space-md flex flex-col sm:flex-row items-center justify-between gap-space-sm font-label-sm text-label-sm text-on-surface-variant">
-      <p>{UI.footer.copyright}</p>
+      <p> &copy; {UI.footer.copyright}</p>
       <p class="font-code-sm text-code-sm">{UI.footer.builtWith}</p>
     </div>
   </div>

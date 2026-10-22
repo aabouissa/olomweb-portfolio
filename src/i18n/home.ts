@@ -120,7 +120,7 @@ const ar: HomeDict = {
   heroImageAlt:
     'مكتب استوديو برمجيات حديث متعدد الشاشات يعرض أكواداً بإضاءة أزرق ملكي وسماوي',
   stats: [
-    { icon: 'visibility', value: '+100K', label: 'مشاهدة تعليمية على يوتيوب' },
+    { icon: 'visibility', value: '+1.9M', label: 'مشاهدة تعليمية على يوتيوب' },
     { icon: 'code_blocks', value: '+20', label: 'مشروع برمجـي مفتوح المصدر' },
     { icon: 'video_library', value: '+15', label: 'سلسلة تدريبية متكاملة' },
     { icon: 'verified', value: '99%', label: 'تقييم ومردود إيجابي للمجتمع' },
@@ -299,7 +299,7 @@ const en: HomeDict = {
   terminalStatus: 'Shipping High Impact Videos',
   heroImageAlt: 'A modern software engineering studio desk with glowing navy, royal blue and cyan monitors',
   stats: [
-    { icon: 'visibility', value: '+100K', label: 'Educational views on YouTube' },
+    { icon: 'visibility', value: '+1.9M', label: 'Educational views on YouTube' },
     { icon: 'code_blocks', value: '+20', label: 'Open-source software projects' },
     { icon: 'video_library', value: '+15', label: 'Complete course series' },
     { icon: 'verified', value: '99%', label: 'Positive community feedback' },

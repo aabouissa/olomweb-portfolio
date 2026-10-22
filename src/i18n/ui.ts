@@ -11,10 +11,9 @@ export const ui = {
     langLabel: 'اللغة',
     nav: {
       home: 'الرئيسية',
-      courses: 'شروحات ودورات يوتيوب',
+      courses: 'الدورات',
       projects: 'معرض المشاريع',
-      about: 'عني وعن شبكة علوم',
-      contact: 'تواصل واستشارات',
+      about: 'من نحن',
     },
     bookConsulting: 'احجز استشارة',
     social: {
@@ -28,17 +27,16 @@ export const ui = {
     },
     footer: {
       tagline:
-        'منصة هندسية ومحطة تقنية متخصصة في هندسة البرمجيات، النظم المعمارية، وتقديم شروحات تقنية احترافية لإثراء المحتوى البرمجي العربي بأعلى معايير الدقة والجودة.',
+        'شبكة علوم تهتم بتقديم محتوى علمي تقني يهدف لإثراء المحتوى البرمجي العربي بأعلى معايير الجودة والدقة.',
       quickTitle: 'روابط سريعة',
       quick: {
-        courses: 'شروحات يوتيوب البرمجية',
-        projects: 'المشاريع البرمجية المفتوحة',
-        about: 'السيرة الذاتية ورؤية الشبكة',
-        contact: 'استشارات معمارية وتطوير',
+        courses: 'شروحات يوتيوب',
+        projects: 'المشاريع البرمجية',
+        about: 'السيرة الذاتية',
       },
       communityTitle: 'التواصل والمجتمع',
       communityText: 'تابع المستجدات التقنية وانضم لمجتمع مطوري شبكة علوم عبر القنوات المعتمدة.',
-      copyright: '© 2025 شبكة علوم OLOMWEB. جميع الحقوق محفوظة للمؤسس.',
+      copyright: 'جميع الحقوق محفوظة لشبكة علوم.',
       builtWith: 'Built with Clean Astro Component Architecture',
       skipToContent: 'تخطى إلى المحتوى',
       openMenu: 'فتح القائمة',
@@ -63,10 +61,9 @@ export const ui = {
     langLabel: 'Language',
     nav: {
       home: 'Home',
-      courses: 'YouTube Courses & Tutorials',
+      courses: 'Courses & Tutorials',
       projects: 'Projects Gallery',
-      about: 'About & Mission',
-      contact: 'Contact & Consulting',
+      about: 'About',
     },
     bookConsulting: 'Book a Consultation',
     social: {
@@ -80,18 +77,17 @@ export const ui = {
     },
     footer: {
       tagline:
-        'An engineering hub and tech station specialized in software engineering, systems architecture, and professional technical tutorials, enriching the Arabic programming content with the highest standards of accuracy and quality.',
+        'OLOMWEB dedicated to providing technical and scientific content aimed at enriching Arabic programming content with the highest standards of quality and accuracy.',
       quickTitle: 'Quick Links',
       quick: {
-        courses: 'Programming YouTube tutorials',
-        projects: 'Open-source projects',
-        about: 'Biography & network vision',
-        contact: 'Architecture & development consulting',
+        courses: 'YouTube tutorials',
+        projects: 'Projects',
+        about: 'Biography',
       },
       communityTitle: 'Contact & Community',
       communityText:
         'Stay up to date with technical releases and join the OLOMWEB developer community through our official channels.',
-      copyright: '© 2025 OLOMWEB شبكة علوم. All rights reserved to the founder.',
+      copyright: 'All rights reserved to OLOMWEB.',
       builtWith: 'Built with Clean Astro Component Architecture',
       skipToContent: 'Skip to content',
       openMenu: 'Open menu',

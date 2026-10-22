@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
-    "astro": "^7.3.2",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.4.2",
     "autoprefixer": "^10.6.0",
     "postcss": "^8.5.28",
     "tailwindcss": "^4.3.3"

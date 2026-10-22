@@ -1,5 +1,6 @@
 ---
 import { ui, localizedRoutes } from '@/i18n/ui.ts';
+import SocialIcon from './SocialIcon.astro';
 import LogoRTL from '../assets/olomweb-rtl.svg'
 import LogoLTR from '../assets/olomweb-ltr.svg'
 
@@ -18,7 +19,6 @@ const navItems = [
   { key: 'courses', label: locale.nav.courses, href: routes.courses },
   { key: 'projects', label: locale.nav.projects, href: routes.projects },
   { key: 'about', label: locale.nav.about, href: routes.about },
-  { key: 'contact', label: locale.nav.contact, href: routes.contact },
 ] as const;
 
 const activeClass = 'bg-primary-container text-on-primary font-bold rounded-lg';
@@ -29,57 +29,50 @@ const idleClass = 'font-label-md text-label-md text-on-surface-variant hover:tex
   id="site-header"
   class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
 >
-  <div class="h-20 max-w-[1360px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop flex items-center justify-between gap-space-md">
-    <div class="flex items-center gap-space-md">
+  <div class="h-20 max-w-[1360px] mx-auto px-margin-mobile md:px-margin lg:px-margin-desktop grid grid-cols-[1fr_auto_1fr] items-center gap-space-md">
+    <div class="flex items-center justify-start">
       <a href={routes.home} aria-label={locale.brandLine} class="flex items-center gap-space-sm" data-path="home">
         { lang === 'en'
           ? <img width="155" src={LogoLTR.src} alt="OLOMWEB">
           : <img width="155" src={LogoRTL.src} alt="OLOMWEB">
         }
       </a>
-      <nav class="hidden xl:flex items-center gap-space-sm" aria-label={locale.nav.home}>
-        {
-          navItems.map((item) => (
-            <a
-              aria-current={active === item.key ? 'page' : undefined}
-              class={`px-space-sm py-space-xs rounded-lg ${active === item.key ? activeClass : idleClass}`}
-              data-path={item.key}
-              href={item.href}
-            >
-              {item.label}
-            </a>
-          ))
-        }
-      </nav>
     </div>
-    <div class="flex items-center gap-space-sm">
+    <nav class="hidden xl:flex items-center justify-center gap-space-sm" aria-label={locale.nav.home}>
+      {
+        navItems.map((item) => (
+          <a
+            aria-current={active === item.key ? 'page' : undefined}
+            class={`px-4 py-2 rounded-lg ${active === item.key ? activeClass : idleClass}`}
+            data-path={item.key}
+            href={item.href}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="flex items-center justify-end gap-space-sm">
       <div class="hidden md:flex items-center gap-space-xs text-on-surface-variant">
-        <a aria-label={locale.social.youtube} class="p-space-xs rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors" href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-          <span class="material-symbols-outlined text-[20px]">smart_display</span>
+        <a aria-label={locale.social.youtube} class="p-space-xs rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors" href="https://youtube.com/@olomweb" target="_blank" rel="noopener noreferrer">
+          <SocialIcon name="youtube" />
         </a>
-        <a aria-label={locale.social.github} class="p-space-xs rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors" href="https://github.com" target="_blank" rel="noopener noreferrer">
-          <span class="material-symbols-outlined text-[20px]">code</span>
+        <a aria-label={locale.social.github} class="p-space-xs rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors" href="https://github.com/aabouissa" target="_blank" rel="noopener noreferrer">
+          <SocialIcon name="github" />
         </a>
-        <a aria-label={locale.social.telegram} class="p-space-xs rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors" href="#">
-          <span class="material-symbols-outlined text-[20px]">alternate_email</span>
+        <a aria-label={locale.social.telegram} class="p-space-xs rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors" href="https://t.me/aabouissa" target="_blank" rel="noopener noreferrer">
+          <SocialIcon name="telegram" />
         </a>
-        <a aria-label={locale.social.profile} class="p-space-xs rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors" href={routes.about}>
-          <span class="material-symbols-outlined text-[20px]">hub</span>
+        <a aria-label={locale.social.linkedin} class="p-space-xs rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors" href="https://linkedin.com/in/aabouissa" target="_blank" rel="noopener noreferrer">
+          <SocialIcon name="linkedin" />
         </a>
       </div>
-      <a
-        class="hidden sm:inline-flex items-center justify-center px-space-md py-space-xs rounded-lg bg-primary-container text-on-primary font-label-md text-label-md shadow-[0_2px_4px_-1px_rgba(6,35,77,0.04)] hover:brightness-105 transition-all"
-        data-path="contact"
-        href={routes.contact}
-      >
-        {locale.bookConsulting}
-      </a>
       <a
         href={altUrl}
         hreflang={altLang}
         aria-label={locale.switchLang}
         title={locale.switchLang}
-        class="hidden sm:inline-flex items-center px-space-sm py-space-xs rounded-lg border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary transition-colors font-label-md text-label-md"
+        class="hidden sm:inline-flex items-center px-4 py-2 rounded-lg border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary transition-colors font-label-md text-label-md"
       >
         {altLabel}
       </a>
@@ -93,9 +86,6 @@ const idleClass = 'font-label-md text-label-md text-on-surface-variant hover:tex
       >
         <span class="material-symbols-outlined text-[22px]">menu</span>
       </button>
-      <div class="hidden md:flex w-8 h-8 rounded-full bg-primary items-center justify-center shrink-0">
-        <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
-      </div>
     </div>
   </div>
   <div id="mobile-menu" class="xl:hidden hidden bg-surface border-t border-surface-container px-margin-mobile pt-space-sm pb-space-md shadow-lg">
